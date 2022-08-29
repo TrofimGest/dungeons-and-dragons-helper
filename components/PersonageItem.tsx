@@ -1,19 +1,18 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from './Themed';
-import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
 
-type Props = { item: number };
+type Props = { item: number; id: number; name: string };
 
-const PersonageItem = (props: Props) => {
+const PersonageItem = ({ item, id, name }: Props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.addPersonageButton}>
         <View style={styles.buttonContainer}>
-          <Text>{props.item}</Text>
-          <View>
-            <Text>Инфернус</Text>
-            <Text>Тифлинг-колдун</Text>
+          <Text>{item}</Text>
+          <View style={styles.textContainer}>
+            <Text>{name}</Text>
+            <Text>{id}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -22,7 +21,7 @@ const PersonageItem = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: { width: '100%', marginVertical: 10 },
+  container: { width: '100%', paddingVertical: 10 },
   addPersonageButton: {
     backgroundColor: '#fff',
     borderRadius: 20,
@@ -34,6 +33,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  textContainer: {
+    backgroundColor: 'transparent',
   },
 });
 

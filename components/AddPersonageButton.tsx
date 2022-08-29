@@ -2,16 +2,21 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from './Themed';
 import { FontAwesome } from '@expo/vector-icons';
 import React, { useState } from 'react';
+import { IPersonage } from '../interfaces/interfaces';
 
-type Props = {
-  addPersonage: (personage: number) => void;
-};
+type Props = { addPersonage: (personage: IPersonage) => void };
 
-const AddPersonageButton = (props: Props) => {
-  const [index, setIndex] = useState<number>(1);
+const AddPersonageButton = ({ addPersonage }: Props) => {
+  const [index, setIndex] = useState(0);
 
   const handleAddPersonage = () => {
-    props.addPersonage(index);
+    const time = Date.now();
+    const newPersonage = {
+      id: index,
+      key: time,
+      name: 'Hell',
+    };
+    addPersonage(newPersonage);
     setIndex(index + 1);
   };
 
@@ -19,7 +24,7 @@ const AddPersonageButton = (props: Props) => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.addPersonageButton}
-        onPress={() => handleAddPersonage()}
+        onPress={handleAddPersonage}
       >
         <View style={styles.buttonContainer}>
           <Text>Создать нового персонажа</Text>
